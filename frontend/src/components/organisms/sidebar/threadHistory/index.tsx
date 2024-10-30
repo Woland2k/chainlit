@@ -15,6 +15,7 @@ import {
 } from '@chainlit/react-client';
 
 import { threadsFiltersState } from 'state/threads';
+import { vcLastThreadState } from 'state/vcLastThread';
 
 import { ThreadList } from './ThreadList';
 import Filters from './filters';
@@ -38,10 +39,17 @@ export function ThreadHistory() {
   const apiClient = useContext(ChainlitContext);
   const { firstInteraction, messages, threadId } = useChatMessages();
   const navigate = useNavigate();
+  const vcLastThread = useRecoilValue(vcLastThreadState);
 
   useEffect(() => {
     if (ref.current) {
       ref.current.scrollTop = _scrollTop;
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!firstInteraction && vcLastThread.threadId) {
+      navigate(`/thread/${vcLastThread.threadId}`);
     }
   }, []);
 

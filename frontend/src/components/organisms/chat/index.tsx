@@ -1,9 +1,11 @@
 import { useUpload } from 'hooks';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { toast } from 'sonner';
 import { v4 as uuidv4 } from 'uuid';
+
+import { vcLastThreadState } from 'state/vcLastThread';
 
 import { Alert, Box, Stack } from '@mui/material';
 
@@ -156,7 +158,7 @@ const Chat = ({ isExpanded, toggleExpand, toggleChat }: IChatProps) => {
     options: { noClick: true }
   });
 
-  const { threadId } = useChatMessages();
+  const { threadId, firstInteraction } = useChatMessages();
 
   useEffect(() => {
     const currentPage = new URL(window.location.href);
@@ -175,6 +177,27 @@ const Chat = ({ isExpanded, toggleExpand, toggleChat }: IChatProps) => {
     }
   }, []);
 
+  // VC
+  const [lastThread, setVcLastThread] = useRecoilState(vcLastThreadState);
+  const { messages } = useChatMessages();
+ 
+  useEffect(() => {
+    if (threadId && messages.length > 0) {
+      setVcLastThread({
+        threadId,
+        messages,
+        timestamp: Date.now()
+      });
+  }
+  }, [threadId, messages]);
+
+  useEffect(() => {
+  if (!threadId && lastThread.threadId && !firstInteraction) {
+    navigate(`/thread/${lastThread.threadId}`);
+  }
+  }, []);
+
+  // !VC
   const enableMultiModalUpload =
     !disabled && config?.features?.spontaneous_file_upload?.enabled;
 

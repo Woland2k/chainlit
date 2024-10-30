@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import { vcLastThreadState } from 'state/vcLastThread';
 
 import { Box, IconButton, IconButtonProps, Tooltip } from '@mui/material';
 
@@ -15,6 +17,7 @@ export default function NewChatButton(props: IconButtonProps) {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const { clear } = useChatInteract();
+  const setVcLastThread = useSetRecoilState(vcLastThreadState);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -25,6 +28,11 @@ export default function NewChatButton(props: IconButtonProps) {
   };
 
   const handleConfirm = () => {
+    setVcLastThread({
+      threadId: null,
+      messages: [],
+      timestamp: 0
+    });
     clear();
     navigate('/');
     handleClose();
