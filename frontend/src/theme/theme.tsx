@@ -87,7 +87,7 @@ const darkTheme = (fontFamily?: string, breakpoints?: BreakpointsOptions) =>
     }
   });
 
-const lightTheme = (fontFamily?: string, breakpoints?: BreakpointsOptions) =>
+const lightTheme = (config: any, fontFamily?: string, breakpoints?: BreakpointsOptions) =>
   createTheme({
     typography: fontFamily ? { fontFamily } : typography,
     components,
@@ -98,13 +98,13 @@ const lightTheme = (fontFamily?: string, breakpoints?: BreakpointsOptions) =>
       success,
       error,
       background: {
-        default: white,
-        paper: '#F7F3F3'
+        default: config?.UI?.theme?.light?.background || white,
+        paper: config?.UI?.theme?.light?.paper || '#F7F3F3'
       },
       primary: {
-        main: '#FF7E13',
-        dark: primary[800],
-        light: '#FFB273',
+        main: config?.UI?.theme?.light?.primary?.main || '#FF7E13',
+        dark: config?.UI?.theme?.light?.primary?.dark || primary[800],
+        light: config?.UI?.theme?.light?.primary?.light || '#FFB273',
         contrastText: white
       },
       secondary: {
@@ -123,12 +123,13 @@ const lightTheme = (fontFamily?: string, breakpoints?: BreakpointsOptions) =>
 
 const makeTheme = (
   variant: 'dark' | 'light',
+  config: any,
   fontFamily?: string,
   breakpoints?: BreakpointsOptions
 ) =>
   variant === 'dark'
     ? darkTheme(fontFamily, breakpoints)
-    : lightTheme(fontFamily, breakpoints);
+    : lightTheme(config,fontFamily, breakpoints);
 
 const darkGreyButtonTheme = createTheme({
   typography,

@@ -243,6 +243,14 @@ const Input = memo(
           }}
           InputProps={{
             disableUnderline: true,
+            startAdornment: (
+              <InputAdornment
+                sx={{ width: 0, ml: 0, color: 'text.secondary' }}
+                position="start"
+              >
+                {startAdornment}
+              </InputAdornment>
+            ),
             endAdornment: (
               <SubmitButton onSubmit={submit} disabled={disabled || !value} />
             )

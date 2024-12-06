@@ -11,6 +11,7 @@ import {
 } from '@chainlit/react-client';
 
 import { Translator } from 'components/i18n';
+import { orange, neutrals } from 'theme/palette';
 
 interface SubmitButtonProps {
   disabled?: boolean;
@@ -43,13 +44,15 @@ const SubmitButton = ({ disabled, onSubmit }: SubmitButtonProps) => {
             id="stop-button" 
             onClick={handleClick}
             sx={{
-              color: 'text.secondary',
+              width: 32,
+              height: 32,
+              color: 'text.primary',
               '&:hover': {
-                backgroundColor: 'rgba(0, 0, 0, 0.04)'
+                backgroundColor: orange.dark
               }
             }}
           >
-            <StopCircle />
+            <StopCircle sx={{ color: orange.dark }} />
           </IconButton>
         </Tooltip>
       ) : (
@@ -62,14 +65,14 @@ const SubmitButton = ({ disabled, onSubmit }: SubmitButtonProps) => {
             disabled={disabled} 
             onClick={onSubmit}
             sx={{
-              backgroundColor: disabled ? '#E0E0E0' : '#FF7E13',
-              color: disabled ? '#9E9E9E' : '#fff',
+              backgroundColor: disabled ? neutrals.grey100 : orange.main,
+              color: disabled ? neutrals.grey200 : neutrals.white,
               '&:hover': {
-                backgroundColor: disabled ? '#E0E0E0' : '#F4511E'
+                backgroundColor: disabled ? neutrals.grey100 : orange.dark
               },
               '&.Mui-disabled': {
-                backgroundColor: '#E0E0E0',
-                color: '#fff'
+                backgroundColor: neutrals.grey100,
+                color: neutrals.white
               },
               transition: 'all 0.2s ease',
               width: 32,

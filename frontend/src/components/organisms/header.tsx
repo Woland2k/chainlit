@@ -65,7 +65,7 @@ const Header = memo(({ isExpanded: propIsExpanded, toggleExpand, toggleChat }: H
         sx={{
           display: 'flex',
           alignItems: 'center',
-          gap: '16px'
+          gap: '8px'
         }}
       >
         <ChatProfiles />
@@ -73,8 +73,8 @@ const Header = memo(({ isExpanded: propIsExpanded, toggleExpand, toggleChat }: H
         <Tooltip title={localIsExpanded ? "Minimize" : "Expand"}>
           <IconButton 
             sx={{ 
-              height: '22px', 
-              width: '22px',
+              height: '30px', 
+              width: '30px',
             }} 
             onClick={handleExpandClick}
           >
@@ -84,8 +84,8 @@ const Header = memo(({ isExpanded: propIsExpanded, toggleExpand, toggleChat }: H
         <Tooltip title='Close'>
           <IconButton 
             sx={{ 
-              height: '22px', 
-              width: '22px',
+              height: '30px', 
+              width: '30px',
             }} 
             onClick={handleCloseClick}
           >
