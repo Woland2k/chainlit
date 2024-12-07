@@ -53,10 +53,29 @@ export const yellow = {
   900: '#995C00'
 };
 
+export const orange = {
+  main: '#FF7E13',
+  light: '#FFB273',
+  dark: '#F4511E'
+};
+
+export const neutrals = {
+  white: '#FFFFFF',
+  grey50: '#F7F3F3',
+  grey100: '#E0E0E0',
+  grey200: '#9E9E9E',
+  grey700: grey[700],
+  grey800: grey[800],
+  grey850: grey[850],
+  grey900: grey[900]
+};
+
 export default {
   white,
   grey,
   primary,
   green,
-  yellow
+  yellow,
+  orange,
+  neutrals
 };
